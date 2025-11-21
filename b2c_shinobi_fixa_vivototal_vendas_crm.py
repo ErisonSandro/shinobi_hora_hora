@@ -107,17 +107,21 @@ def delete(table, date, project, dataset):
 
 
 
+
 def transform(df):
+    # Converter para datetime e manter como datetime64 (não usar .dt.date)
+    df['data_pedido_ajustada'] = pd.to_datetime(df['data_pedido_ajustada_formatada'])
+    
+    df['hora_pedido'] = df['hora_criacao']	
+    df['data_da_modificacao'] = df['data_da_modificacao_formatada']
+    df['created_at'] = datetime.now(pytz.timezone('America/Sao_Paulo')).replace(tzinfo=None)
+    
+    df = df.drop(columns=["data_criacao", "hora_criacao"])
+    
+    return df
 
-  df['data_pedido_ajustada'] = pd.to_datetime(df['data_pedido_ajustada_formatada']).dt.date
-  df['hora_pedido'] = df['hora_criacao']	
-  df['data_da_modificacao'] = df['data_da_modificacao_formatada']
-  df['created_at'] = datetime.now(pytz.timezone('America/Sao_Paulo')).replace(tzinfo=None)
-
-  df = df.drop(columns=["data_criacao", "hora_criacao"])
 
 
-  return df
 
 
 
