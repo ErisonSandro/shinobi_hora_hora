@@ -112,6 +112,9 @@ def transform(df):
   df['codigo_postal'] = df['codigo_postal_hash']
   df['created_at'] = datetime.now(pytz.timezone('America/Sao_Paulo')).replace(tzinfo=None)
 
+  df['hora_criacao'] = df['hora_criacao'].astype(str).str.split(':').str[0]
+  df['hora_modificacao'] = df['hora_modificacao'].astype(str).str.split(':').str[0]
+
   df = df.drop(columns=["codigo_postal_hash", "data_modificacao_formatada"])
 
   return df

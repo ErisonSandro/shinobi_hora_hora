@@ -107,6 +107,9 @@ def transform(df):
   df['data_modificacao'] = pd.to_datetime(df['data_modificacao_formatada']).dt.date
   df['created_at'] = datetime.now(pytz.timezone('America/Sao_Paulo')).replace(tzinfo=None)
 
+  df['hora_criacao'] = df['hora_criacao'].astype(str).str.split(':').str[0]
+  df['hora_modificacao'] = df['hora_modificacao'].astype(str).str.split(':').str[0]
+
   df = df.drop(columns=["data_modificacao_formatada"])
 
   return df
