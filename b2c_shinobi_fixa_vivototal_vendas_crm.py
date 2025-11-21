@@ -107,6 +107,7 @@ def delete(table, date, project, dataset):
 
 
 
+
 def transform(df):
 
   df['data_pedido_ajustada'] = pd.to_datetime(df['data_pedido_ajustada_formatada']).dt.date
@@ -121,6 +122,9 @@ def transform(df):
 
 
   return df
+
+
+
 
 
 
